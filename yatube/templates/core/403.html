@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Ошибка 403{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h1></h1>
+            <p class="lead">Нет доступа</p>
+            <p class="lead"><a href="{% url 'posts:index' %}">Вернуться на главную страницу</a></p>
+        </div>
+    </div>    
+{% endblock %}

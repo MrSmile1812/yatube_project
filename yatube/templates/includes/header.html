@@ -1,7 +1,7 @@
 {% load static %}
 <nav 
   class="navbar navbar-light" 
-  style="background-color: lightskyblue">
+  style="background-color: #f4c430">
   <div class="container">
     <a 
       class="navbar-brand" 
@@ -11,8 +11,48 @@
         height="30" 
         class="d-inline-block align-top" 
         alt="">
-      <span 
-        style="color:red">Ya</span>tube
-    </a>
-  </div>
-</nav>
+      <em><strong>
+        <span style="color:white">S</span>mile
+        <span style="color:white">P</span>rojects</a>
+      </strong></em>
+      <ul class="nav nav-pills">
+        {% with request.resolver_match.view_name as view_name %}  
+        <li class="nav-item "> 
+          <a class="nav-link link-dark {% if view_name  == 'about:author' %}active{% endif %}" 
+            href="{% url 'about:author' %}">Об авторе</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link link-dark {% if view_name  == 'about:tech' %}active{% endif %}" 
+            href="{% url 'about:tech' %}">Технологии</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item"> 
+          <a class="nav-link link-dark {% if view_name  == 'post_create' %}active{% endif %}" 
+            href="{% url 'posts:post_create' %}">Новая запись</a>
+        </li>
+        <li class="nav-item"> 
+          <a class="nav-link link-dark {% if view_name  == 'users:password_reset_form' %}active{% endif %}" 
+            href="{% url 'users:password_reset_form' %}">Изменить пароль</a>
+        </li>
+        <li class="nav-item"> 
+          <a class="nav-link link-dark {% if view_name  == 'users:logout' %}active{% endif %}" 
+            href="{% url 'users:logout' %}">Выйти</a>
+        </li>
+        <li>
+          Пользователь: <em><strong>{{ user.get_full_name }}</strong></em>
+        </li>
+        {% else %}
+        <li class="nav-item"> 
+          <a class="nav-link link-dark {% if view_name  == 'users:login' %}active{% endif %}" 
+            href="{% url 'users:login' %}">Войти</a>
+        </li>
+        <li class="nav-item"> 
+          <a class="nav-link link-dark {% if view_name  == 'users:signup' %}active{% endif %}" 
+            href="{% url 'users:signup' %}">Регистрация</a>
+        </li>
+        {% endif %}
+        {% endwith %} 
+      </ul>
+    </div>
+  </nav>      
+</header> 
