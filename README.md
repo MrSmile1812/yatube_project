@@ -1,8 +1,9 @@
-# YaTube
+# YaTube (Smile Projects)
 ## Описание
 
 Bloggers' Social Network
 Здесь Вы сможете общаться со своими друзьями, обмениваться полезными материалами и делится с ними частичкой совей жизни!
+Этот проект был создан в процессе прохождения курса на Яндекс Практикум. 
 
 ## Технологии
 
@@ -18,10 +19,10 @@ pip install -r requirements.txt
 ``` 
 - В папке с файлом manage.py выполните команду:
 ```
-python3 manage.py runserver
+python manage.py runserver
 ```
 ### Автор
-George Prokofev (Mr.Smile)
+George Prokofev (MrSmile)
 
 ## License
 
