@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
-{% block title %} Пост {{ post.text|truncatechars:30 }} {% endblock %}
+{% block title %} Пост '{{ post.text|truncatechars:30 }}' {% endblock %}
 {% block content %}
   <div class="row">
     <aside class="col-12 col-md-3">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          Дата публикации: {{ post.pub_date }}
+          Дата публикации: {{ post.pub_date|date:"d E Y" }}
         </li>
         {% if post.group %}
         <li class="list-group-item">
@@ -17,14 +17,19 @@
         {% endif %}
       </li>
         <li class="list-group-item">
-          Автор: {{ post.author.get_full_name }}
+          Автор:
+          {% if post.author.get_full_name %}
+            {{ post.author.get_full_name }}
+          {% else %}
+            {{ post.author }} 
+          {% endif %}
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">
           Всего постов автора:  <span>{{ count }}</span>
         </li>
         <em><li class="list-group-item">
           <a href={% url 'posts:profile' post.author.username %}>
-            все посты пользователя {{ author }}
+            все посты пользователя 
           </a>
         </em>
         </li>

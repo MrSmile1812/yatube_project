@@ -1,8 +1,20 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
-{% block title %}Профиль пользователя {{ author.get_full_name }} {% endblock %}
+{% block title %}Профиль пользователя 
+  {% if author.get_full_name %}
+    {{ author.get_full_name }}
+  {% else %}
+    {{ post.author }} 
+  {% endif %}
+{% endblock %}
 {% block content %}
-  <h1>Все посты пользователя {{ author.get_full_name  }} </h1>
+  <h1>Все посты пользователя 
+    {% if author.get_full_name %}
+      {{ author.get_full_name }}
+    {% else %}
+      {{ post.author }} 
+    {% endif %}
+  </h1>
   <h3>Всего постов: {{ count }} </h3>
   {% if following %}
     <a
@@ -12,21 +24,29 @@
       Отписаться
     </a>
   {% else %}
+    {% if user.is_authenticated %}
       <a
         class="btn btn-warning"
         href="{% url 'posts:profile_follow' author.username %}" role="button"
       >
         Подписаться
       </a>
-   {% endif %}
+    {% endif %}
+  {% endif %}
     <ul>
       <li>
-        Автор: {{ author.get_full_name }} - 
-        <em><a href={% url 'posts:profile' author.username %}> все посты пользователя {{ author.get_full_name }} </a></em>
+        Автор: 
+        {% if author.get_full_name %}
+          {{ author.get_full_name }}
+        {% else %}
+          {{ post.author }} 
+        {% endif %}
+        - 
+        <em><a href={% url 'posts:profile' author.username %}> все посты пользователя</a></em>
       </li>
       {% for post in page_obj %}     
       <li>
-        Дата публикации: {{ post.pub_date }}
+        Дата публикации: {{ post.pub_date|date:"d E Y" }}
       </li>
     </ul>
     {% thumbnail post.image "960x425" crop="center" upscale=True as im %}
